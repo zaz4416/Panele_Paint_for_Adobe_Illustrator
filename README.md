@@ -1,4 +1,4 @@
-# Panele_Paint
+# Panele_Paint_for_Adobe_Illustrator
 
 動作環境
 Adobe社のイラストレータで動作します。
