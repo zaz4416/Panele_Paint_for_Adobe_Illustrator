@@ -1,8 +1,7 @@
-._.DS_Store
-._.gitignore
+### macOS ###
+# General
 .DS_Store
-._.github
 .github/._workflows
-.DS_Store
-._README.md
-._README.md
+
+# Thumbnails
+._*
