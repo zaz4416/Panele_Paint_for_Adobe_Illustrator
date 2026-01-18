@@ -55,23 +55,20 @@ function ClassInheritance(subClass, superClass) {
 //-----------------------------------
 // クラス CViewDLg
 //-----------------------------------
-   
  
-// メンバー変数
-    var m_TheObject;
-    var m_RadioBtnAngle01;
-    var m_RadioBtnAngle02;
-    var m_RadioBtnAngle03;
-
 // コンストラクタ    
 function CViewDLg( DlgName, InstanceName ) {
        
     // 初期化
-    const m_TheObject = this;
+    var m_TheObject = this;
     CPaletteWindow.call( m_TheObject );         // コンストラクタ
     m_TheObject.InitDialog( DlgName );          // イニシャライザ
     m_TheObject.InitInstance( InstanceName );   // インスタンス初期化
     var xDlg = m_TheObject.GetDlg();            // ダイアログへのオブジェクトを得る
+
+    var m_RadioBtnAngle01;
+    var m_RadioBtnAngle02;
+    var m_RadioBtnAngle03;
 
     var btnwhdth = 70;
     var btnheiht = 30;
@@ -140,9 +137,9 @@ function CViewDLg( DlgName, InstanceName ) {
         } 
     }
 
-    m_RadioBtnAngle02 = objPannel02Group.add("radiobutton");
-    m_RadioBtnAngle02.text = "↻ 90度"
-    m_RadioBtnAngle02.onClick = function() {
+    m_TheObject.m_RadioBtnAngle02 = objPannel02Group.add("radiobutton");
+    m_TheObject.m_RadioBtnAngle02.text = "↻ 90度"
+    m_TheObject.m_RadioBtnAngle02.onClick = function() {
         try
         {
             m_TheObject.CallFunc( "RightTurn_Func" );
@@ -153,9 +150,9 @@ function CViewDLg( DlgName, InstanceName ) {
         }
     }
 
-    m_RadioBtnAngle01 = objPannel02Group.add("radiobutton");
-    m_RadioBtnAngle01.text = "↺ 90度"
-    m_RadioBtnAngle01.onClick = function() {
+    m_TheObject.m_RadioBtnAngle01 = objPannel02Group.add("radiobutton");
+    m_TheObject.m_RadioBtnAngle01.text = "↺ 90度"
+    m_TheObject.m_RadioBtnAngle01.onClick = function() {
         try
         {
             m_TheObject.CallFunc( "LeftTurn_Func" );
@@ -166,9 +163,9 @@ function CViewDLg( DlgName, InstanceName ) {
         }
     }
 
-    m_RadioBtnAngle03 = objPannel02Group.add("radiobutton");
-    m_RadioBtnAngle03.text = "180度"
-    m_RadioBtnAngle03.onClick = function() {
+    m_TheObject.m_RadioBtnAngle03 = objPannel02Group.add("radiobutton");
+    m_TheObject.m_RadioBtnAngle03.text = "180度"
+    m_TheObject.m_RadioBtnAngle03.onClick = function() {
         try
         {
             m_TheObject.CallFunc( "UptoTurn_Func" );
@@ -292,9 +289,9 @@ ClassInheritance(CViewDLg, CPaletteWindow);
 
 // ClassInheritanceの後ろで、追加したいメソッドを定義
 CViewDLg.prototype.NoSeledtedAngle = function() {
-    m_RadioBtnAngle01.value = false;
-    m_RadioBtnAngle02.value = false;
-    m_RadioBtnAngle03.value = false;
+    this.m_RadioBtnAngle01.value = false;
+    this.m_RadioBtnAngle02.value = false;
+    this.m_RadioBtnAngle03.value = false;
 }
 
 // ClassInheritanceの後ろで、追加したいメソッドを定義
