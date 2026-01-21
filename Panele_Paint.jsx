@@ -335,6 +335,7 @@ CViewDLg.ObjectSelect_Func = function()
     try
     {
         var Dlg = CViewDLg.TheObj;
+    
         app.executeMenuCommand("deselectall");               // 選択を解除
         Dlg.SetAdobeTool(cAdobeDirectObjectSelectTool);   // 塗グループ選択
     } // try
@@ -348,12 +349,13 @@ CViewDLg.ObjectSelect_Func = function()
     } // finally
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.EyedropperTool_Func = function()
 {
     try
     {
         var Dlg = CViewDLg.TheObj;
+    
         Dlg.SetAdobeTool(cAdobeEyedropperTool);   // スポイト  
     } // try
     catch(e)
@@ -366,7 +368,7 @@ CViewDLg.EyedropperTool_Func = function()
     } // finally
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.BlobBrush_Func = function()
 {
     try
@@ -395,7 +397,7 @@ CViewDLg.BlobBrush_Func = function()
  
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.Eraser_Func = function()
 {
     try
@@ -424,13 +426,15 @@ CViewDLg.Eraser_Func = function()
  
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.InitRotate_Func = function()
 {
     try
     {
+        var Dlg = CViewDLg.TheObj;
+
         app.activeDocument.activeView.rotateAngle = 0;
-        CViewDLg.TheObj.NoSeledtedAngle();
+        Dlg.NoSeledtedAngle();
     } // try
     catch(e)
     {
@@ -443,7 +447,7 @@ CViewDLg.InitRotate_Func = function()
  
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.RotateRight_Func = function()
 {
     try
@@ -468,7 +472,7 @@ CViewDLg.RotateRight_Func = function()
   
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.RotateLeft_Func = function()
 {
     try
@@ -493,7 +497,7 @@ CViewDLg.RotateLeft_Func = function()
   
  }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.LeftTurn_Func = function()
 {
     try
@@ -518,7 +522,7 @@ CViewDLg.LeftTurn_Func = function()
  
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.RightTurn_Func = function()
 {
     try
@@ -543,7 +547,7 @@ CViewDLg.RightTurn_Func = function()
  
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.UptoTurn_Func = function()
 {
     try
@@ -561,7 +565,7 @@ CViewDLg.UptoTurn_Func = function()
  
 }
 
-// CViewDLgの静的メソッドを定義
+// CViewDLgの静的メソッドを定義　(prototypeを記述しない場合は、静的メソッドになる)
 CViewDLg.NoCompoundFunc = function()
 {
     try
