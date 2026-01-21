@@ -334,8 +334,9 @@ CViewDLg.ObjectSelect_Func = function()
 {
     try
     {
+        var Dlg = CViewDLg.TheObj;
         app.executeMenuCommand("deselectall");               // 選択を解除
-        this.SetAdobeTool(cAdobeDirectObjectSelectTool);   // 塗グループ選択
+        Dlg.SetAdobeTool(cAdobeDirectObjectSelectTool);   // 塗グループ選択
     } // try
     catch(e)
     {
@@ -352,7 +353,8 @@ CViewDLg.EyedropperTool_Func = function()
 {
     try
     {
-        this.SetAdobeTool(cAdobeEyedropperTool);   // スポイト  
+        var Dlg = CViewDLg.TheObj;
+        Dlg.SetAdobeTool(cAdobeEyedropperTool);   // スポイト  
     } // try
     catch(e)
     {
