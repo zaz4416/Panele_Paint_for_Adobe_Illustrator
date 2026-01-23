@@ -42,18 +42,12 @@ $.evalFile(SELF.path + "/ZazLib/" + "PaletteWindow.jsx");
  var cdAobeEraserTool             = 'Adobe Eraser Tool';                    // 消しゴム
 
 
+ //-----------------------------------
+// クラス CSurface
 //-----------------------------------
-// クラス CViewDLg
-//-----------------------------------
- 
-//~~~~~~~~~~~~~~~~~~~~
-// 1. コンストラクタ定義
-//~~~~~~~~~~~~~~~~~~~~
-function CViewDLg( DlgName ) {
-       
-    // 初期化
-    CPaletteWindow.call( this );         // コンストラクタ
-    this.InitDialog( DlgName );          // イニシャライザ
+function CSurface( DlgName ) {
+    CPaletteWindow.call( this,false );       // コンストラクタ
+    this.InitDialog( DlgName );              // イニシャライザ
 
     // インスタンスのコンストラクタ（子クラス自身）の静的プロパティに保存することで、動的に静的プロパティを定義
     this.constructor.TheObj = this;
@@ -61,21 +55,12 @@ function CViewDLg( DlgName ) {
     // クラスへのポインタを確保
     var self = this;
 
-    var m_RadioBtnAngle01;
-    var m_RadioBtnAngle02;
-    var m_RadioBtnAngle03;
-
-    var btnwhdth = 70;
-    var btnheiht = 30;
-    var sldrwhdth = 150;
-
-    var m_ToolName = cAdobeDirectObjectSelectTool;   // グループ選択
+    this.m_RadioBtnAngle01;
+    this.m_RadioBtnAngle02;
+    this.m_RadioBtnAngle03;
 
     var objPannel01 = this.m_Dialog.add("panel");
     objPannel01.text = "ビュー回転";
-    //objPannel01.orientation = "row";    // パネル内の要素を横に並べる
-    //objPannel01.alignChildren = ["center", "top"];
-    //objPannel01.bounds = [0,0,btnwhdth+sldrwhdth+btnwhdth+20,60];
 
     // --- 1行目 (横並びグループ1) ---
     var objPannel01Group = objPannel01.add("group");
@@ -85,8 +70,7 @@ function CViewDLg( DlgName ) {
     var objPannel02Group = objPannel01.add("group");
     objPannel02Group.orientation = "row"; // 1行目の中身は横に並べる
 
-
-    // ダイアログにボタン追加
+        // ダイアログにボタン追加
     m_BtnResizeDown = objPannel01Group.add("button");
     m_BtnResizeDown.text = "↻";
     m_BtnResizeDown.preferredSize = [30, 30];
@@ -171,7 +155,7 @@ function CViewDLg( DlgName ) {
         }
     }
 
-    // ダイアログにボタン追加
+       // ダイアログにボタン追加
     m_BtnSimplify = self.AddButton("( Undo )");
     m_BtnSimplify.onClick = function() {
         try
@@ -274,13 +258,34 @@ function CViewDLg( DlgName ) {
         }
     }
 
+}
+ClassInheritance(CSurface, CPaletteWindow); // クラス継承
+
+
+//-----------------------------------
+// クラス CViewDLg
+//-----------------------------------
+ 
+//~~~~~~~~~~~~~~~~~~~~
+// 1. コンストラクタ定義
+//~~~~~~~~~~~~~~~~~~~~
+function CViewDLg( DlgName ) {
+       
+    // 初期化
+    CSurface.call( this, DlgName );         // コンストラクタ
+
+    // クラスへのポインタを確保
+    var self = this;
+
+    var m_ToolName = cAdobeDirectObjectSelectTool;   // グループ選択
+
     self.SetAdobeTool(m_ToolName);   // 起動時のツールを指定する
 }
 
 //~~~~~~~~~~~~~~
 // 2. クラス継承
 //~~~~~~~~~~~~~~
-ClassInheritance(CViewDLg, CPaletteWindow);
+ClassInheritance(CViewDLg, CSurface);
 
 //~~~~~~~~~~~~~~~~~~~~~
 // 3. 静的メソッドの定義
