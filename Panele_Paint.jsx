@@ -57,10 +57,11 @@ var LangStrings = {
 //-----------------------------------
 function CSurface( DlgName ) {
     CPaletteWindow.call( this,false );       // コンストラクタ
-    this.InitDialog( DlgName );              // イニシャライザ
 
     // クラスへのポインタを確保
     var self = this;
+
+    self.m_Dialog.opacity       = 0.7; // （不透明度）
 
     // GUI用のスクリプトを読み込む
     var selfFile = new File($.fileName);
