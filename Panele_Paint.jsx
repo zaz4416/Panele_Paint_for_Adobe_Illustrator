@@ -56,97 +56,34 @@ function CSurface( DlgName ) {
     // クラスへのポインタを確保
     var self = this;
 
-    this.m_RadioBtnAngle01;
-    this.m_RadioBtnAngle02;
-    this.m_RadioBtnAngle03;
+    // GUI用のスクリプトを読み込む
+    var selfFile = new File($.fileName);
+    var currentDir = selfFile.parent;
+    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI.Panele_Paint/ScriptUI Dialog Builder - Export.jsx" ) )
+    {
+        // GUIに変更を入れる
+        self.m_BtnResizeDown.onClick        = function() { self.onRotateRightClick(); }
+        self.m_BtnInitRotate.onClick        = function() { self.onInitRotateClick(); }
+        self.m_BtnResizeUp.onClick          = function() { self.onRotateLeftClick(); }
+        self.m_RadioBtnAngle02.onClick      = function() { self.onRightTurnClick(); }
+        self.m_RadioBtnAngle01.onClick      = function() { self.onLeftTurnClick(); }
+        self.m_RadioBtnAngle03.onClick      = function() { self.onUptoTurnClick(); }
+        self.m_BtnUndo.onClick              = function() { self.onUndoClick(); }
+        self.m_BtnSimplify.onClick          = function() { self.onToSimlePathClick(); }
+        self.m_RadioBtnBlobBrush.onClick    = function() { self.onBlobBrushClick(); }
+        self.m_RadioBtnEraser.onClick       = function() { self.onEraserClick(); }
+        self.m_RadioBtnObjectSelect.onClick = function() { self.onObjectSelectClick(); }
+        self.m_objRb01.onClick              = function() { self.onEyedropperToolClick(); }
+        self.m_BtnFitIn.onClick             = function() { self.onFitinClick() }
+        self.m_BtnFillSelectedArea.onClick  = function() { self.onNoCompoundClick(); }
+        self.m_BtnCancel.onClick            = function() { self.onCloseDlgClick(); }
 
-    var objPannel01 = this.m_Dialog.add("panel");
-    objPannel01.text = "ビュー回転";
-
-    // --- 1行目 (横並びグループ1) ---
-    var objPannel01Group = objPannel01.add("group");
-    objPannel01Group.orientation = "row"; // 1行目の中身は横に並べる
-
-    // --- 2行目 (横並びグループ1) ---
-    var objPannel02Group = objPannel01.add("group");
-    objPannel02Group.orientation = "row"; // 1行目の中身は横に並べる
-
-    // ダイアログにボタン追加
-    var m_BtnResizeDown = objPannel01Group.add("button");
-    m_BtnResizeDown.text = "↻";
-    m_BtnResizeDown.preferredSize = [30, 30];
-    m_BtnResizeDown.onClick = function() { self.onRotateRightClick(); }
-
-    // ダイアログにボタン追加
-    var m_BtnInitRotate = objPannel01Group.add("button");
-    m_BtnInitRotate.text = "★";
-    m_BtnInitRotate.preferredSize = [20, 20];
-    m_BtnInitRotate.onClick = function() { self.onInitRotateClick(); }
-
-    // ダイアログにボタン追加
-    var m_BtnResizeUp = objPannel01Group.add("button");
-    m_BtnResizeUp.text= "↺";
-    m_BtnResizeUp.preferredSize = [30, 30];
-    m_BtnResizeUp.onClick = function() { self.onRotateLeftClick(); }
-
-    self.m_RadioBtnAngle02 = objPannel02Group.add("radiobutton");
-    self.m_RadioBtnAngle02.text = "↻ 90度"
-    self.m_RadioBtnAngle02.onClick = function() { self.onRightTurnClick(); }
-
-    self.m_RadioBtnAngle01 = objPannel02Group.add("radiobutton");
-    self.m_RadioBtnAngle01.text = "↺ 90度"
-    self.m_RadioBtnAngle01.onClick = function() { self.onLeftTurnClick(); }
-
-    self.m_RadioBtnAngle03 = objPannel02Group.add("radiobutton");
-    self.m_RadioBtnAngle03.text = "180度"
-    self.m_RadioBtnAngle03.onClick = function() { self.onUptoTurnClick(); }
-
-    // ダイアログにボタン追加
-    var m_BtnSimplify = self.AddButton("( Undo )");
-    m_BtnSimplify.onClick = function() { self.onUndoClick(); }
-
-    // ダイアログにボタン追加
-    var m_BtnSimplify = self.AddButton("( パス単純化 )");
-    m_BtnSimplify.onClick = function() { self.onToSimlePathClick(); }
-
-    var objPannel02 = this.m_Dialog.add("panel");
-    objPannel02.text = "ツール";
-
-    m_GrCheckbox = objPannel02.add("checkbox");
-    m_GrCheckbox.text = "パス・チェック"
-    m_GrCheckbox.value = true;              // アイテムが選択されているか監視する
-
-    var m_RadioBtnBlobBrush = objPannel02.add("radiobutton");
-    this.m_RadioBtnBlobBrush = m_RadioBtnBlobBrush;
-    m_RadioBtnBlobBrush.text = "塗りブラシ";
-    m_RadioBtnBlobBrush.onClick = function() { self.onBlobBrushClick(); }
-
-    var m_RadioBtnEraser = objPannel02.add("radiobutton");
-    this.m_RadioBtnEraser = m_RadioBtnEraser;
-    m_RadioBtnEraser.text = "消しゴム";
-    m_RadioBtnEraser.onClick = function() { self.onEraserClick(); }
-
-    var m_RadioBtnObjectSelect = objPannel02.add("radiobutton");
-    this.m_RadioBtnObjectSelect = m_RadioBtnObjectSelect;
-    m_RadioBtnObjectSelect.text = "グループ選択";
-    m_RadioBtnObjectSelect.onClick = function() { self.onObjectSelectClick(); }
-
-    var m_objRb01 = objPannel02.add("radiobutton");
-    this.m_objRb01 = m_objRb01;
-    m_objRb01.text = "スポイト";
-    m_objRb01.onClick = function() { self.onEyedropperToolClick(); }
-
-    // ダイアログにボタン追加
-    var m_BtnFitIn = self.AddButton("( 全体を表示 )");
-    m_BtnFitIn.onClick = function() { self.onFitinClick() }
- 
-    // ダイアログにボタン追加
-    var m_BtnSimplify = self.AddButton("( 選択されたアイテムを塗りつぶし )");
-    m_BtnSimplify.onClick = function() { self.onNoCompoundClick(); }
-
-    // ダイアログにボタン追加
-    m_BtnCancel = self.AddButton( "閉じる" );
-    m_BtnCancel.onClick = function () { self.onCloseDlgClick(); }
+        // アイテムが選択されているか監視する
+        self.m_GrCheckbox.value = true;              
+    }
+    else{
+        alert("GUIが未定です");
+    }
 }
 ClassInheritance(CSurface, CPaletteWindow); // クラス継承
 
