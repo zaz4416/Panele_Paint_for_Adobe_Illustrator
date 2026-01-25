@@ -117,18 +117,22 @@ function CSurface( DlgName ) {
     m_GrCheckbox.value = true;              // アイテムが選択されているか監視する
 
     var m_RadioBtnBlobBrush = objPannel02.add("radiobutton");
+    this.m_RadioBtnBlobBrush = m_RadioBtnBlobBrush;
     m_RadioBtnBlobBrush.text = "塗りブラシ";
     m_RadioBtnBlobBrush.onClick = function() { self.onBlobBrushClick(); }
 
     var m_RadioBtnEraser = objPannel02.add("radiobutton");
+    this.m_RadioBtnEraser = m_RadioBtnEraser;
     m_RadioBtnEraser.text = "消しゴム";
     m_RadioBtnEraser.onClick = function() { self.onEraserClick(); }
 
     var m_RadioBtnObjectSelect = objPannel02.add("radiobutton");
+    this.m_RadioBtnObjectSelect = m_RadioBtnObjectSelect;
     m_RadioBtnObjectSelect.text = "グループ選択";
     m_RadioBtnObjectSelect.onClick = function() { self.onObjectSelectClick(); }
 
     var m_objRb01 = objPannel02.add("radiobutton");
+    this.m_objRb01 = m_objRb01;
     m_objRb01.text = "スポイト";
     m_objRb01.onClick = function() { self.onEyedropperToolClick(); }
 
@@ -611,26 +615,27 @@ CViewDLg.prototype.NoSeledtedAngle = function() {
 CViewDLg.prototype.SetAdobeTool = function(TlName) {
     m_ToolName = TlName;
     app.selectTool(m_ToolName);
+    var self = this;
         
-    m_RadioBtnObjectSelect.value = false;
-    m_objRb01.value = false;
-    m_RadioBtnBlobBrush.value = false;
-    m_RadioBtnEraser.value = false;
+    self.m_RadioBtnObjectSelect.value = false;
+    self.m_objRb01.value = false;
+    self.m_RadioBtnBlobBrush.value = false;
+    self.m_RadioBtnEraser.value = false;
 
      if ( m_ToolName == cAdobeDirectObjectSelectTool ) {  // グループ選択
-        m_RadioBtnObjectSelect.value = true;
+        self.m_RadioBtnObjectSelect.value = true;
     }
 
     if ( m_ToolName == cAdobeEyedropperTool ) {         // スポイト
-        m_objRb01.value = true;
+        self.m_objRb01.value = true;
     }
 
     if ( m_ToolName == cAdobeBlobBrushTool ) {          // 塗りブラシ
-        m_RadioBtnBlobBrush.value = true;
+        self.m_RadioBtnBlobBrush.value = true;
     }
 
     if ( m_ToolName == cdAobeEraserTool ) {            // 消しゴム
-        m_RadioBtnEraser.value = true;
+        self.m_RadioBtnEraser.value = true;
     }
 }
 
