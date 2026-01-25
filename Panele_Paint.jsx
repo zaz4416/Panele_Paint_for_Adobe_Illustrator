@@ -59,7 +59,8 @@ function CSurface( DlgName ) {
     // GUI用のスクリプトを読み込む
     var selfFile = new File($.fileName);
     var currentDir = selfFile.parent;
-    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI.Panele_Paint/ScriptUI Dialog Builder - Export.jsx" ) )
+    var GUI_JSX = {en : "ScriptUI Dialog Builder - Export_EN.jsx", ja : "ScriptUI Dialog Builder - Export_JP.jsx"} ;
+    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI.Panele_Paint/" + GUI_JSX ) )
     {
         // GUIに変更を入れる
         self.m_BtnResizeDown.onClick        = function() { self.onRotateRightClick(); }
