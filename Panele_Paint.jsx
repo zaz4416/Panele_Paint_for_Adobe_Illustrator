@@ -36,6 +36,15 @@ $.evalFile(SELF.path + "/ZazLib/" + "SupprtFuncLib.jsx");
 $.evalFile(SELF.path + "/ZazLib/" + "PaletteWindow.jsx");
 
 
+// 言語ごとの辞書を定義
+var LangStrings = {
+    GUI_JSX: {
+        en : "ScriptUI Dialog Builder - Export_EN.jsx",
+        ja : "ScriptUI Dialog Builder - Export_JP.jsx"
+    }
+};
+
+
  // ツール文字
  var cAdobeDirectObjectSelectTool = 'Adobe Direct Object Select Tool';      // グループ選択
  var cAdobeEyedropperTool         = 'Adobe Eyedropper Tool';                // スポイト
@@ -50,17 +59,13 @@ function CSurface( DlgName ) {
     CPaletteWindow.call( this,false );       // コンストラクタ
     this.InitDialog( DlgName );              // イニシャライザ
 
-    // インスタンスのコンストラクタ（子クラス自身）の静的プロパティに保存することで、動的に静的プロパティを定義
-    this.constructor.TheObj = this;
-
     // クラスへのポインタを確保
     var self = this;
 
     // GUI用のスクリプトを読み込む
     var selfFile = new File($.fileName);
     var currentDir = selfFile.parent;
-    var GUI_JSX = {en : "ScriptUI Dialog Builder - Export_EN.jsx", ja : "ScriptUI Dialog Builder - Export_JP.jsx"} ;
-    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI.Panele_Paint/" + GUI_JSX ) )
+    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI.Panele_Paint/" + LangStrings.GUI_JSX ) )
     {
         // GUIに変更を入れる
         self.m_BtnResizeDown.onClick        = function() { self.onRotateRightClick(); }
@@ -121,7 +126,7 @@ CViewDLg.ObjectSelect_Func = function()
 {
     try
     {
-        var self = CViewDLg.TheObj;
+        var self = CViewDLg.self;
     
         app.executeMenuCommand("deselectall");               // 選択を解除
         self.SetAdobeTool(cAdobeDirectObjectSelectTool);   // 塗グループ選択
@@ -140,7 +145,7 @@ CViewDLg.EyedropperTool_Func = function()
 {
     try
     {
-        var self = CViewDLg.TheObj;
+        var self = CViewDLg.self;
     
         self.SetAdobeTool(cAdobeEyedropperTool);   // スポイト  
     } // try
@@ -158,7 +163,7 @@ CViewDLg.BlobBrush_Func = function()
 {
     try
     {
-        var self = CViewDLg.TheObj;
+        var self = CViewDLg.self;
 
         // アイテムが選択されている条件で、app.selectTool('Adobe Blob Brush Tool')を実施するか判定
         if ( self.m_GrCheckbox.value ) {
@@ -186,7 +191,7 @@ CViewDLg.Eraser_Func = function()
 {
     try
     {        
-        var self = CViewDLg.TheObj;
+        var self = CViewDLg.self;
 
         // アイテムが選択されている条件で、app.selectTool('Adobe Eraser Tool')を実施するか判定
         if ( self.m_GrCheckbox.value ) {
@@ -214,7 +219,7 @@ CViewDLg.InitRotate_Func = function()
 {
     try
     {
-        self = CViewDLg.TheObj;
+        self = CViewDLg.self;
 
         app.activeDocument.activeView.rotateAngle = 0;
         self.NoSeledtedAngle();
@@ -591,8 +596,6 @@ CViewDLg.prototype.JugeKindOfItem = function() {
 }
 
 
-
-
 function escExit(event) {
     if(event.keyName === 'Escape'){
         alert( "終わります。" );
@@ -600,8 +603,8 @@ function escExit(event) {
     }
  }
  
-var DlgPaint = new CViewDLg( "塗りサポーター" );  //インスタンスを生成
-    DlgPaint.addEventListener( 'keydown',  escExit );
+var DlgPaint = new CViewDLg( "塗りサポーター" );            //インスタンスを生成
+    DlgPaint.addEventListener( 'keydown',  escExit );     // ESCを監視
 
 main();
 
