@@ -19,20 +19,20 @@
 //activeDocument.fullName.fsName.split("/").reverse()[0].split(".")[0]
 
 
-// Ver.1.0 : 2026/01/28
+// Ver.1.0 : 2026/02/04
 
 #target illustrator
 #targetengine "main"
 
 
-SELF = (function(){
-    try {app.documents.test()}
-    catch(e) {return File(e.fileName)}
+var SELF_FILE = (function() {
+try { var path = $.fileName || Folder.current.fullName; return new File(decodeURI(path)); } catch (e) { return null; }
 })();
+var SCRIPT_DIR = (SELF_FILE !== null) ? SELF_FILE.parent : Folder.current;
 
 // 外部のJSXを読み込む
-$.evalFile(SELF.path + "/ZazLib/" + "PaletteWindow.jsx");
-$.evalFile(SELF.path + "/ZazLib/" + "SupprtFuncLib.jsx");
+$.evalFile(SCRIPT_DIR + "/ZazLib/" + "PaletteWindow.jsx");
+$.evalFile(SCRIPT_DIR + "/ZazLib/" + "SupprtFuncLib.jsx");
 
 
 // 言語ごとの辞書を定義
@@ -73,7 +73,7 @@ function CViewDLg() {
     // GUI用のスクリプトを読み込む
     var selfFile = new File($.fileName);
     var currentDir = selfFile.parent;
-    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI.Panele_Paint/" + LangStrings.GUI_JSX ) )
+    if ( self.LoadGUIfromJSX( currentDir.fullName + "/GUI/Panele_Paint/" + LangStrings.GUI_JSX ) )
     {
         // GUIに変更を入れる
         self.m_BtnResizeDown.onClick        = function() { self.onRotateRightClick(); }
